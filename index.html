@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>parallax-rellax</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <script src="./js/jquery-3.4.1.min.js" charset="utf-8"></script>
+  <script src="./js/rellax.min.js" charset="utf-8"></script>
+  <script src="./js/jquery.superscrollorama.js" charset="utf-8"></script>
+  <script src="./js/TweenMax.min.js" charset="utf-8"></script>
+  <script src="./js/jquery.lettering-0.6.1.min.js" charset="utf-8"></script>
+  <script src="./js/script.js" charset="utf-8"></script>
+</head>
+
+<body>
+  <script>
+    $(function() {
+      var rellax = new Rellax('.rellax');
+    });
+
+    $(function() {
+
+      $('.line').children().addBack().contents().each(function() {
+        $(this).replaceWith($(this).text().replace(/(\S)/g, '<span class="text-move">$&</span>'));
+      });
+
+      // var controller = $.superscrollorama();
+      // controller.addTween('#fade-it', TweenMax.to($('.text-move'), .3, {
+      //   y: 0,
+      //   opacity: 1
+      // }));
+      //
+      // var count = TweenMax.getTweensOf($('.text-move'));
+      // if (count > 0) {
+      //   TweenMax.killTweensOf('.text-move');
+      // }
+
+      $(window).on('scroll', function() {
+
+        var windowHeight = $(window).height(),
+          topWindow = $(window).scrollTop();
+
+        $('.line').each(function() {
+          var targetPosition = $(this).offset().top;
+          if (topWindow > targetPosition - windowHeight + 100) {
+            $('.line').addClass("fade-in-text");
+            $('.dot2').addClass("fade-in-dot");
+          }
+        });
+
+      });
+
+    });
+  </script>
+  <section class="section1">
+    <p>SCROLL↓</p>
+  </section>
+  <section class="section2">
+    <div class="wrapper">
+      <div class="text">
+        <h2 id="fade-it">
+          <span class="line line1">そのお悩みに、</span>
+          <span class="line line2">資生堂</span>
+          <span class="line line3">パーフェクトカバー。</span>
+        </h2>
+        <p>パーフェクトカバー ファンデーションは、通常のファンデーションではカバーできないさまざまな肌のお悩みをカバーします。</p>
+        <p><a href="">商品ラインナップを見る</a></p>
+        <p><a href="">使い方動画を見る</a></p>
+
+      </div>
+      <div class="image">
+        <img src="img/img-6.png" alt="">
+      </div>
+      <span class="dot dot1 rellax" data-rellax-speed="2"></span>
+      <span class="dot dot2"></span>
+      <span class="dot dot3"></span>
+      <span class="dot dot4 rellax" data-rellax-speed="2"></span>
+    </div>
+  </section>
+  <section class="section3">
+  </section>
+</body>
+
+</html>
